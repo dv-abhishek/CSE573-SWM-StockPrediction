@@ -8,3 +8,8 @@ Update from Naveen: I have added one gram features extraction code for both amaz
 If you just run the 'n-gram-feature-extraction.ipynb' notebook in your local, it would generate the pickle files for features for respective company. That would hardly take 5 mins.
 
 In your local, please directly use the files put up by Abhishek in drive as it takes lots of time in preprocessing.  
+
+Update from Mounavi:
+I am adding the link for google collab which contains the code to obtain the tweets data related to stocks of AMZN and AAPL.
+
+https://colab.research.google.com/drive/1uWemb2sNdLnid-GuIsxZecFlqBgYsKEE?usp=sharing
