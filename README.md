@@ -13,3 +13,7 @@ Update from Mounavi:
 I am adding the link for google collab which contains the code to obtain the tweets data related to stocks of AMZN and AAPL.
 
 https://colab.research.google.com/drive/1uWemb2sNdLnid-GuIsxZecFlqBgYsKEE?usp=sharing
+
+Update from Naveen:
+Please update the cumulative info about your test in following sheet: 
+https://docs.google.com/spreadsheets/d/1y2zzZLYs_7U2vcR_DQS3VK-J6BWuluwOXD17g_-BP4k/edit?usp=sharing
