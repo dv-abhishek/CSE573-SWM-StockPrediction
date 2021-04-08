@@ -17,3 +17,8 @@ https://colab.research.google.com/drive/1uWemb2sNdLnid-GuIsxZecFlqBgYsKEE?usp=sh
 Update from Naveen:
 Please update the cumulative info about your test in following sheet: 
 https://docs.google.com/spreadsheets/d/1y2zzZLYs_7U2vcR_DQS3VK-J6BWuluwOXD17g_-BP4k/edit?usp=sharing
+
+Update from Nagarjuna:
+
+Tokenized preprocessed data using google news vectors [GloveVectorizeTokens.ipynb]
+Trained the tokens on different machine learning models using [model-training-glove-1-day.ipynb and model-training-glove-4-hrs.ipynb]
