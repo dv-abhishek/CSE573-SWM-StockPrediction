@@ -81,7 +81,7 @@ print("final test vector shape:",test_tf_idf_vector.shape)
 
 
 #testing input document on Logistic Regression
-with open('../model-training-and-testing/logistic_regression-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
+with open('../model-training/logistic_regression-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
     logistic_regression_one_gram_one_day_classifier = pickle.load(f)
     
 y_pred=logistic_regression_one_gram_one_day_classifier.predict(test_tf_idf_vector)
@@ -95,7 +95,7 @@ elif -1 == label:
 
 
 #testing input document on xgBoost
-xgboost_one_gram_one_day_classifier = joblib.load('../model-training-and-testing/random_forest-XGBoost-pca-one-gram-one-day-mixed-data-3k-30-model.pkl')
+xgboost_one_gram_one_day_classifier = joblib.load('../model-training/random_forest-XGBoost-pca-one-gram-one-day-mixed-data-3k-30-model.pkl')
 
 y_pred=xgboost_one_gram_one_day_classifier.predict(test_tf_idf_vector)
 
@@ -107,7 +107,7 @@ elif -1 == label:
 
 
 #testing input document on Random Forest
-with open('../model-training-and-testing/random-forest-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
+with open('../model-training/random-forest-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
     random_forest_one_gram_one_day_classifier = pickle.load(f)
     
 y_pred=random_forest_one_gram_one_day_classifier.predict(test_tf_idf_vector)
@@ -120,7 +120,7 @@ elif -1 == label:
 
 
 #testing input document on SVM
-with open('../model-training-and-testing/svm-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
+with open('../model-training/svm-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
     svm_one_gram_one_day_classifier = pickle.load(f)
     
 y_pred=svm_one_gram_one_day_classifier.predict(test_tf_idf_vector)

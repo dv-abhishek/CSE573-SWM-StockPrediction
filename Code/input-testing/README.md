@@ -2,7 +2,7 @@ For prediction, dump the input news article in 'test-input.txt' and then inside 
 
 python predict.py
 
-Note: The predict.py testing script expects the following trained model pickle files in 'model-training-and-testing' directory
+Note: The predict.py testing script expects the following trained model pickle files in 'model-training' directory
 1. logistic_regression-pca-one-gram-one-day-mixed-data-model.pkl
 2. random_forest-XGBoost-pca-one-gram-one-day-mixed-data-3k-30-model.pkl
 3. random-forest-pca-one-gram-one-day-mixed-data-model.pkl
