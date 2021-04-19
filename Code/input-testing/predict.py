@@ -1,4 +1,4 @@
-# Note: The following testing script expects the following trained model pickle files in model-training-and-testing directory
+# Note: The following testing script expects the following trained model pickle files in model-training directory
 #1. logistic_regression-pca-one-gram-one-day-mixed-data-model.pkl
 #2. random_forest-XGBoost-pca-one-gram-one-day-mixed-data-3k-30-model.pkl
 #3. random-forest-pca-one-gram-one-day-mixed-data-model.pkl
