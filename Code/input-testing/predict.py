@@ -16,22 +16,30 @@ import pickle
 import joblib
 import string
 import re
+import sys
 
 from nltk.corpus import stopwords, words
 from nltk.stem import LancasterStemmer, PorterStemmer, SnowballStemmer
 
-with open('test-input.txt', 'r') as file:
-    input_doc = file.read().replace('\n', '')
+input_doc = sys.argv[1]
+model = sys.argv[2]
+print(input_doc, model)
+# with open('test-input.txt', 'r') as file:
+#     input_doc = file.read().replace('\n', '')
 
 input_doc = input_doc.lower()
 
-print("input is: \n", input_doc)
+#print("input is: \n", input_doc)
 
 input_sentences = []
 for sentence in nltk.sent_tokenize(input_doc):
     if 'amazon' in sentence or 'amzn' in sentence or 'apple' in sentence or 'aapl' in sentence:
         input_sentences.append(sentence)
 
+# if not input_sentences:
+#     print('The input news provided is not related to either AMAZON or APPLE')
+# else
+#     print('i am not empty')
 def extract_words(input_words):
     from nltk.corpus import words
     
@@ -67,66 +75,66 @@ def extract_words(input_words):
 
 
 token_words = []
+print(token_words)
 for sentence in input_sentences:
     token_words.extend(nltk.wordpunct_tokenize(sentence))
 token_words = extract_words(token_words)
 
 preprocessed_input = [' '.join(token_words)]
 
-with open('trained-one-gram-vectorizer.pkl', 'rb') as f:
+with open('/Users/mounavi/Sites/CSE573-SWM-StockPrediction/Code/input-testing/trained-one-gram-vectorizer.pkl', 'rb') as f:
     trained_one_gram_vectorizer = pickle.load(f)
 
 test_tf_idf_vector = trained_one_gram_vectorizer.transform(preprocessed_input)
-print("final test vector shape:",test_tf_idf_vector.shape)
+#print("final test vector shape:",test_tf_idf_vector.shape)
+if(model == "LogisticRegression"):
+    #testing input document on Logistic Regression
+    with open('/Users/mounavi/Sites/CSE573-SWM-StockPrediction/Code/model-training/logistic_regression-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
+        logistic_regression_one_gram_one_day_classifier = pickle.load(f)
+        
+    y_pred=logistic_regression_one_gram_one_day_classifier.predict(test_tf_idf_vector)
+
+    label = y_pred[0]
+    if 1 == label:
+        print("As per Logistic Regression model, following given news, the stock price will go up!");
+    elif -1 == label:
+        print("As per Logistic Regression model, following given news, the stock price will go down!");
 
 
-#testing input document on Logistic Regression
-with open('../model-training/logistic_regression-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
-    logistic_regression_one_gram_one_day_classifier = pickle.load(f)
-    
-y_pred=logistic_regression_one_gram_one_day_classifier.predict(test_tf_idf_vector)
+elif(model == "XGBoost"):
+    #testing input document on xgBoost
+    xgboost_one_gram_one_day_classifier = joblib.load('/Users/mounavi/Sites/CSE573-SWM-StockPrediction/Code/model-training/random_forest-XGBoost-pca-one-gram-one-day-mixed-data-3k-30-model.pkl')
 
-label = y_pred[0]
-if 1 == label:
-    print("As per Logistic Regression model, following given news, the stock price will go up!");
-elif -1 == label:
-    print("As per Logistic Regression model, following given news, the stock price will go down!");
+    y_pred=xgboost_one_gram_one_day_classifier.predict(test_tf_idf_vector)
 
+    label = y_pred[0]
+    if 1 == label:
+        print("As per XGBoost model, following given news, the stock price will go up!");
+    elif -1 == label:
+        print("As per XGBoost model, following given news, the stock price will go down!");
 
+elif(model == "RandomForest"):
+    #testing input document on Random Forest
+    with open('/Users/mounavi/Sites/CSE573-SWM-StockPrediction/Code/model-training/random-forest-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
+        random_forest_one_gram_one_day_classifier = pickle.load(f)
+        
+    y_pred=random_forest_one_gram_one_day_classifier.predict(test_tf_idf_vector)
 
-#testing input document on xgBoost
-xgboost_one_gram_one_day_classifier = joblib.load('../model-training/random_forest-XGBoost-pca-one-gram-one-day-mixed-data-3k-30-model.pkl')
+    label = y_pred[0]
+    if 1 == label:
+        print("As per Random Forest model, following given news, the stock price will go up!");
+    elif -1 == label:
+        print("As per Random Forest model, following given news, the stock price will go down!");
 
-y_pred=xgboost_one_gram_one_day_classifier.predict(test_tf_idf_vector)
+else:
+    #testing input document on SVM
+    with open('/Users/mounavi/Sites/CSE573-SWM-StockPrediction/Code/model-training/svm-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
+        svm_one_gram_one_day_classifier = pickle.load(f)
+        
+    y_pred=svm_one_gram_one_day_classifier.predict(test_tf_idf_vector)
 
-label = y_pred[0]
-if 1 == label:
-    print("As per XGBoost model, following given news, the stock price will go up!");
-elif -1 == label:
-    print("As per XGBoost model, following given news, the stock price will go down!");
-
-
-#testing input document on Random Forest
-with open('../model-training/random-forest-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
-    random_forest_one_gram_one_day_classifier = pickle.load(f)
-    
-y_pred=random_forest_one_gram_one_day_classifier.predict(test_tf_idf_vector)
-
-label = y_pred[0]
-if 1 == label:
-    print("As per Random Forest model, following given news, the stock price will go up!");
-elif -1 == label:
-    print("As per Random Forest model, following given news, the stock price will go down!");
-
-
-#testing input document on SVM
-with open('../model-training/svm-pca-one-gram-one-day-mixed-data-model.pkl', 'rb') as f:
-    svm_one_gram_one_day_classifier = pickle.load(f)
-    
-y_pred=svm_one_gram_one_day_classifier.predict(test_tf_idf_vector)
-
-label = y_pred[0]
-if 1 == label:
-    print("As per SVM model, following given news, the stock price will go up!");
-elif -1 == label:
-    print("As per SVM model, following given news, the stock price will go down!");
+    label = y_pred[0]
+    if 1 == label:
+        print("As per SVM model, following given news, the stock price will go up!");
+    elif -1 == label:
+        print("As per SVM model, following given news, the stock price will go down!");

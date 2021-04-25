@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="main.css">
+<script src="main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<title>Directional Stock Prediction using Financial Newsand Viral Tweets</title>
+</head>
+<body>
+
+<h1>Directional Stock Prediction using Financial News and Viral Tweets</h1>
+<div id = "parent">
+    <form id = "form_login" onsubmit="return validateForm()">
+    <label for="news">Enter the news</label>
+    <input type="text" id="news" name="news"><br><br>
+    <label for="ml_models">Select the machine learning model</label>
+    <br><br>
+    <input type="radio" id="model1" name="ml_models" value="XGBoost">
+    <label for="model1">XGBoost</label>
+    <input type="radio" id="model2" name="ml_models" value="RandomForest">
+    <label for="model2">Random Forest</label>
+    <input type="radio" id="model3" name="ml_models" value="SVM">
+    <label for="model3">SVM</label>
+    <input type="radio" id="model4" name="ml_models" value="LogisticRegression">
+    <label for="model4">Logistic Regression</label>
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+</div>
+
+<h1 id = "demo"></h1>
+
+</body>
+</html>
